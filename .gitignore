@@ -1,0 +1,8 @@
+﻿*.rpyc
+*.rpyb
+*.swp
+*.bak
+errors.txt
+log.txt
+traceback.txt
+tmp
