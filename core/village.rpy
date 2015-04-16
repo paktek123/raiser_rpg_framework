@@ -50,7 +50,7 @@ init -6 python:
             return "<Village>: {}".format(self.name)
             
     class Location:
-        def __init__(self, name, label, background=None, events=[], map_pic_idle=None, map_pic_hover=None, npc=[], visits=0):
+        def __init__(self, name, label, xpos=None, ypos=None, background=None, events=[], map_pic_idle=None, map_pic_hover=None, npc=[], visits=0):
             self.name = name
             self.label = label
             self.background = background
@@ -61,6 +61,8 @@ init -6 python:
             self.npc = npc
             self.visits = visits
             self.unlocked = False
+            self.xpos = xpos
+            self.ypos = ypos
             
         def interact(self, player, village):
             renpy.call(self.label, player, village)
