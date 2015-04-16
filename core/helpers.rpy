@@ -12,6 +12,8 @@ init -1:
 
 init -1 python:
 
+    import os
+
     BACKGROUND_WIDTH = 800
     BACKGROUND_HEIGHT = 600
     HUD_WIDTH = 140
