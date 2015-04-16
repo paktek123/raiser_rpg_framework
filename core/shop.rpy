@@ -43,7 +43,7 @@ init -1 python:
             return "<Item: {} {} {}>".format(self.name, self.price, self.quantity)
             
     class Shop:
-        def __init__(self, name, background, keeper=None, items=[]):
+        def __init__(self, name, background=None, keeper=None, items=[]):
             self.name = name
             self.items = items
             self.discount = 0
