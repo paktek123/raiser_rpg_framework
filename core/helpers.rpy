@@ -3,6 +3,43 @@
 #
 
 init -1 python:
+
+    BACKGROUND_WIDTH = 800
+    BACKGROUND_HEIGHT = 600
+    HUD_WIDTH = 140
+    HUD_HEIGHT = 150
+    
+    IMAGE_EXCEPTIONS =  []
+    
+    # Define background Images
+    for fname in os.listdir(config.gamedir + '/backgrounds'):
+        if fname.endswith(('.jpg', '.png')):
+            tag = fname[:-4]
+            fname =  'backgrounds/' + fname
+            renpy.image(tag, im.Scale(fname, BACKGROUND_WIDTH, BACKGROUND_HEIGHT))
+            for t in ['morning', 'afternoon', 'evening', 'night']:
+                if t == 'evening':
+                    renpy.image((tag, t), im.Scale(im.Recolor(fname, 255, 178, 102, 255), BACKGROUND_WIDTH, BACKGROUND_HEIGHT))
+                elif t == 'night':
+                    renpy.image((tag, t), im.Scale(im.Recolor(fname, 51, 153, 255, 255), BACKGROUND_WIDTH, BACKGROUND_HEIGHT))
+                else:
+                    renpy.image((tag, t), im.Scale(fname, BACKGROUND_WIDTH, BACKGROUND_HEIGHT))
+                    
+    # Define hud pic Images
+    for fname in os.listdir(config.gamedir + '/hudpics'):
+        if fname.endswith(('.jpg', '.png')):
+            tag = fname[:-4]
+            fname =  'hudpics/' + fname
+            renpy.image(tag, im.Scale(fname, HUD_WIDTH, HUD_HEIGHT))
+
+    # Define tilepics in the tilepics folder
+    for fname in os.listdir(config.gamedir + '/tilepics'):
+        if fname.endswith(('.jpg', '.png')):
+            tag = fname[:-4]
+            fname =  'tilepics/' + fname
+            renpy.image(tag + '_r', im.Scale(fname, 50, 60))
+            renpy.image(tag + '_l', im.Flip(im.Scale(fname, 50, 60), horizontal=True))
+            
     
     #### MAPS AND WORLD EVENTS ####
     
