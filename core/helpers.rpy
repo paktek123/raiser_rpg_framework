@@ -48,6 +48,16 @@ init -1 python:
             renpy.image(tag + '_r', im.Scale(fname, 50, 60))
             renpy.image(tag + '_l', im.Flip(im.Scale(fname, 50, 60), horizontal=True))
             
+    # Setup battles
+    battle1 = Battle(id="1", good_team=[], bad_team=[], xpos=100, ypos=100, battle_label="b_battle_1")
+    battle2 = Battle(id="2", good_team=[], bad_team=[], xpos=300, ypos=100, battle_label="b_battle_2")
+    battle_last = Battle(id="last", good_team=[], bad_team=[], xpos=500, ypos=100, battle_label="b_battle_last")
+    
+    ALL_BATTLES = [battle1, battle2, battle_last]
+    
+    # screen flags
+    screen_on = False
+    calendar_on = False
     
     #### MAPS AND WORLD EVENTS ####
     
