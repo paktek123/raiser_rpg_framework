@@ -2,8 +2,17 @@
 # for your own screens.
 
 ##############################################################################
-# DEFAULT POSITIONING
+# DEFAULT POSITIONING / IMAGES
 #
+
+init -1:
+    image black_fade_small = Solid((0, 0, 0, 150), area=(0.4, 0.7, 0.6,0.4))
+    image black_fade_time = Solid((0, 0, 0, 150), area=(0, 0, 0.28,0.1))
+    image black_fade_text = Solid((0, 0, 0, 150), area=(0, 0, 500,100))
+    image black_fade_inventory = Solid((0, 0, 0, 150), area=(0, 0, 0.33,0.3))
+    image black_fade_battle = Solid((0, 0, 0, 150), area=(0, 0, 0.2,0.2))
+    image world_marker = im.Scale("marker.png", 33, 35)
+    image stats_idle = Solid((0, 0, 0, 200), area=(0.62, 0.0, 300,150))
 
 init python:
     ### MENU GRIDS ###
