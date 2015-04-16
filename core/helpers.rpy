@@ -2,6 +2,14 @@
 # UTILITY FUNCTIONS AND HELPERS
 #
 
+init -1:
+    $ maxhp_increase = 0
+    $ maxchakra_increase = 0
+    $ exp_increase = 0
+    $ bond_increase = 0
+    $ moved = False
+    $ battle_turn = 0
+
 init -1 python:
 
     BACKGROUND_WIDTH = 800
