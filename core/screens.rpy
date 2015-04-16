@@ -2,6 +2,23 @@
 # for your own screens.
 
 ##############################################################################
+# DEFAULT POSITIONING
+#
+
+init python:
+    ### MENU GRIDS ###
+    LOCATION_XPOS_FIRST = 0.4
+    LOCATION_YPOS_FIRST = 0.4
+    start_x = 0.3
+    start_y = 0.3
+    x_delta = 0.2
+    y_delta = 0.07
+    grid_place = [(start_x,start_y), (start_x,start_y + y_delta), (start_x, start_y + 2*y_delta), (start_x, start_y + 3*y_delta), (start_x,start_y+4*y_delta), 
+                  (start_x + x_delta,start_y), (start_x + x_delta,start_y + y_delta), (start_x+x_delta, start_y + 2*y_delta), (start_x+x_delta, start_y + 3*y_delta), (start_x+x_delta,start_y+4*y_delta),
+                  (start_x + 2*x_delta,start_y), (start_x + 2*x_delta,start_y + y_delta), (start_x+2*x_delta, start_y + 2*y_delta), (start_x+2*x_delta, start_y + 3*y_delta), (start_x+2*x_delta,start_y+4*y_delta), ]
+    
+
+##############################################################################
 # CHARACTER CREATION
 #
 
