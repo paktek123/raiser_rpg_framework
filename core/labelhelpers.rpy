@@ -302,12 +302,12 @@ label village_redirect:
     $ current_session.clear_time_to_advance()
     
     # check for active events, if active go to their label
-    python:
-        if is_event_active_today(e_jinchurri_attack, main_time) and e_jinchurri_attack.occurrence < 1:
-            e_jinchurri_attack.occurrence += 1
-            renpy.call(e_jinchurri_attack.label, current_session.main_player, current_session.village)
-        else:
-            e_jinchurri_attack.occurrence = 0
+    #python:
+    #    if is_event_active_today(e_jinchurri_attack, main_time) and e_jinchurri_attack.occurrence < 1:
+    #        e_jinchurri_attack.occurrence += 1
+    #        renpy.call(e_jinchurri_attack.label, current_session.main_player, current_session.village)
+    #    else:
+    #        e_jinchurri_attack.occurrence = 0
             
     # put this in a label ideally
     show screen player_stats
@@ -414,7 +414,7 @@ label village_levelup(player, village):
     $ renpy.call('village_levelup', player, village)
 
 label village_training(player, village):
-    if player.hp < 50 or player.chakra < 50:
+    if player.hp < (player.maxhp * 0.2) or player.chakra < (player.maxchakra * 0.2):
         player.character "I don't have enough hp or chakra to continue, I need to rest before I can train."
         jump village_redirect
     hide train_with_team

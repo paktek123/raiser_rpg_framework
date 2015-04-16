@@ -11,7 +11,7 @@ init -1:
     $ battle_turn = 0
 
 init -1 python:
-
+    
     import os
 
     BACKGROUND_WIDTH = 800
@@ -61,7 +61,6 @@ init -1 python:
     screen_on = False
     calendar_on = False
     
-    # Current Session
     current_session = CurrentSession()
     
     #### MAPS AND WORLD EVENTS ####

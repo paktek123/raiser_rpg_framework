@@ -3,6 +3,8 @@
 #
 
 init -7 python:
+    
+    ALL_MISSIONS = []
 
     class Mission(object):
         def __init__(self, name, hours=0, days=0, months=0, rank="D", dialogue=[], fights=None):
