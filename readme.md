@@ -26,17 +26,17 @@ For existing projects:
 
 1. Upgrade renpy to atleast 6.15
 2. Copy files in /core into /game folder of existing project (WARNING: This will overwrite screens.rpy)
+3. It is possible to customise all of the screens used in the framework.
 
 ### So whats in those files I just copied over?
 
-The rpy files contain all the python Classes and Functions for players, skills and basically all the hardwork done for creating an RPG.
+The rpy files contain all the Python classes and functions for players, skills and basically all the hardwork done for creating an RPG.
 
 ## Quick Start
 
 Lets create our own RPG adventure and introduce many of the concepts in Raiser RPG System.
 
-Lets open up script.rpy with a text editor. Lets start off with declaring some resources. Remove everything from script.rpy and put the following inside:
-
+Lets open up `script.rpy` with a text editor. Remove everything from script.rpy and put the following inside:
 
 
 ```
@@ -128,40 +128,34 @@ label start:
     # set main_player
     $ current_session.main_player = hero
     $ current_session.village = middle_town
-    $ show_village_map(middle_town, hero)`
+    $ show_village_map(middle_town, hero)
 ```
 
-Lets go through what we have done here. The script starts off with an init block in which we will define all of our 'static' resources like images. Next comes the load_resources label. Here we will put all the meat of our RPG. We define the time, characters and a stage. Lets go through each one:
+Save and Run the game!
 
-```
-$ main_time = GameTime(hour=9, day=1, month=1, year=2015)
-```
+### What just happened!?
 
-Here we define the in-game time. This is when our clock starts when we start the game. We will go into more into this later (GameTime section TODO). Character definitions are same the Ren'py API (http://www.renpy.org/doc/html/quickstart.html#characters). 
+Running the `$ show_village_map(middle_town, hero)` shows the player in middle town. Here you can visit different locations like do missions, train to increase your stats (click Show Stats button to see stats), visit your apartment etc, have a play around. This is showing the `villagemap` screen is fully customisable in `screens.rpy`. Please visit the wiki for documentation, https://github.com/paktek123/raiser_rpg_framework/wiki for more.
 
-```
-$ e_weapon_discount = Event(name="Weapon Discount", small_name="WD", frequency=(2, 30)) 
-.....
+## Documentation (in progress)
 
-$ ALL_EVENTS += [e_weapon_discount, e_hospital_discount]
-$ populate_events()
-```
+https://github.com/paktek123/raiser_rpg_framework/wiki
 
-Here we define an 'Event' object, it takes 3 parameters, name, small_name (this will display in the calendar) and frequency. Frequency means the event will occur on every 2nd or 30th of every month, there are more options, see Events section (TODO). We then add our new events into ALL_EVENTS (holds all events) and run populate_events function. This function will populate our calendar with the events we just defined.
+## Usage
 
-```
-$ l_hospital = Location(name='Hospital', label='village_hospital', events=[e_hospital_discount])
-```
+Raiser RPG Framework is free to be used for commercial or non-commercial projects as long as credit is given even if you use parts of the code (or at least link to this repo).
 
-Here we define the hospital location. The Location object (see Location section TODO) is used to define locations that characters can visit whilst in a Village (see Village section TODO). We also bind the hospital event defined earlier to it.
+## Bugs
 
-```
- $ middle_town = Village(id=1, name="Middle Town", leader=None, marker_xpos=0.40, marker_ypos=0.25, map="town_map_1", locations=BASE_LOCATIONS, village_tag="middle_town", mission_locations=2, wealth=50)
-```
+Please report bugs by opening a new github issue, will do my best to response.
 
-A Village (see Village section TODO) contains locations. All 3 villages defined have the same 3 locations in this case. We also put the villages inside ALL_VILLAGES variable.
+## Contributing
 
-We then go on to define shop items (see ShopItem section), shops (see Shop section), player (see Player section), skills (se Skill section) and a stage (see Stage section).
-
-
-
+Contributing is highly encouraged and Raiser comes with its own tests. This is currently in early stages at the moment, there are bound to be bugs and features missing. To contribute follow these steps:
+- Fork this repo
+- Make your changes
+- TDD is highly encouraged, please add any tests for NON-GRAPHICAL CODE ONLY changes. Sorry we can't test screens or user interactions at the moment :(
+- Make sure tests pass, you can run them when you start the game, go to 'Run Tests' instead of start game.
+- Make pull request
+- Pull request will be reviewed and merged
+- Your name will added to the contributor list :)
