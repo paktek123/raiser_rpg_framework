@@ -17,7 +17,7 @@ An RPG framework for Ren'py gaming engine (http://www.renpy.org/). The purpose o
 
 ## Prerequisites
 
-It is reccomended to go through the Ren'py quick start: http://www.renpy.org/doc/html/quickstart.html
+It is recomended to go through the Ren'py quick start: http://www.renpy.org/doc/html/quickstart.html
 
 ## Installation
 
