@@ -135,7 +135,7 @@ Save and Run the game!
 
 ### What just happened!?
 
-Running the `$ show_village_map(middle_town, hero)` shows the player in middle town. Here you can visit different locations like do missions, train to increase your stats (click Show Stats button to see stats), visit your apartment etc, have a play around. This is showing the `villagemap` screen is fully customisable in `screens.rpy`. Please visit the wiki for documentation, https://github.com/paktek123/raiser_rpg_framework/wiki for more.
+Running the `$ show_village_map(middle_town, hero)` shows the player in middle town. Here you can visit different locations, do missions, train to increase your stats (click Show Stats button to see stats), visit your apartment etc, have a play around. This is showing the `villagemap` screen is fully customisable in `screens.rpy`. Please visit the wiki for documentation, https://github.com/paktek123/raiser_rpg_framework/wiki for more.
 
 ## Documentation (in progress)
 
