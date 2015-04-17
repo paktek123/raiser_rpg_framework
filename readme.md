@@ -1,6 +1,6 @@
 # Raiser RPG Framework for Ren'Py
 
-An RPG framework for Ren'py gaming engine (http://www.renpy.org/). The purpose of this framework is to provide a way of creating visual RPGs with little understanding of programming and spend less time creating your own RPG systems.
+An RPG framework for Ren'py gaming engine (http://www.renpy.org/). The purpose of this framework is to provide a way of creating visual RPGs with little understanding of programming (easy API) and spend less time creating your own RPG systems. 
 
 ## Features
 - Includes built in battle system (supports up to 3 v 3 fights)
@@ -159,3 +159,12 @@ Contributing is highly encouraged and Raiser comes with its own tests. This is c
 - Make pull request
 - Pull request will be reviewed and merged
 - Your name will added to the contributor list :)
+
+## Future Plans
+
+There are future plans to provide more options such as equipment, armour and more customisations, it will be the community that will decide in the end. Plans are to add:
+
+- Since all entities are python objects, static files such as YAML or JSON files can be used to define players, skills, events etc and loaded into memory, so you can completely avoid programming :)
+- More 'gameplay' options similar to Fire Emblem, Megaman Battle Network in addition to the current setup, so this becomes the go to solution for all Ren'Py RPG needs.
+- Easy to understand API which anyone can pick up is the main ethos here.
+- More to come...
