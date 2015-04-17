@@ -47,8 +47,8 @@ init -1 python:
         if fname.endswith(('.jpg', '.png')):
             tag = fname[:-4]
             fname =  'tilepics/' + fname
-            renpy.image(tag + '_r', im.Scale(fname, 50, 60))
-            renpy.image(tag + '_l', im.Flip(im.Scale(fname, 50, 60), horizontal=True))
+            renpy.image(tag + '_l', im.Scale(fname, 50, 60))
+            renpy.image(tag + '_r', im.Flip(im.Scale(fname, 50, 60), horizontal=True))
             
     # Setup battles
     battle1 = Battle(id="1", good_team=[], bad_team=[], xpos=100, ypos=100, battle_label="b_battle_1")
@@ -416,7 +416,10 @@ init -1 python:
             show_player_at_pos(enemy, player, None, enemy_tile)
             
             # Do the attack
-            current_skill.action(enemy, player)
+            if current_skill.is_usable(enemy, player):
+                current_skill.action(enemy, player)
+            else:
+                renpy.say(enemy.character, "Standby")
             
             # take away movement chakra too
             enemy.chakra -= (current_skill.range * stage.pull) 

@@ -9,7 +9,7 @@ label tag_partner:
     $ renpy.hide(player.tilepic)
     $ renpy.call('fight', info['main'], enemy, info['tag'], tag_e, stage, win_label, lose_label, draw_label)
     
-label fight(player, enemy, tag_p, tag_e, stage=clearing, win_label='generic_win', lose_label='generic_lose', draw_label='generic_draw', fight_limit=20):
+label fight(player, enemy, tag_p=[], tag_e=[], stage=clearing, win_label='generic_win', lose_label='generic_lose', draw_label='generic_draw', fight_limit=20):
 
     # hide any screens
     $ hide_battle_screen(all=True)
@@ -274,7 +274,7 @@ label skill_redirect:
         if current_session.skill.skill_type == 'counter':
             player.counter_state = True
         
-        if current_session.skill_type == 'attack':
+        if current_session.skill_type in ('ranged', 'melee', 'special'):
             current_session.skill.action(player,enemy)
         elif current_session.skill_type == 'weapon':
             # decrease the quantity then attack

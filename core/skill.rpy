@@ -40,11 +40,11 @@ init -2 python:
             if not self.is_unlocked():
                 return "Skill is learnt but not cannot be used in combat, can be unlocked by training."
                 
-            if not self.has_quantity(player):
+            if not self.has_quantity():
                 return "Weapon not in inventory."
             
         def is_usable(self, player, enemy):
-            if self.is_chakra_requirement_met(player) and self.is_within_range(player, enemy) and self.is_unlocked() and self.has_quantity(player):
+            if self.is_chakra_requirement_met(player) and self.is_within_range(player, enemy) and self.is_unlocked() and self.has_quantity():
                 return True
             return False
             
@@ -55,7 +55,11 @@ init -2 python:
             if hasattr(self, 'quantity'):
                 if self.quantity > 0:
                     return True
-            return False
+                else:
+                    return False
+            else:
+                # its a skill
+                return True
             
         def is_chakra_requirement_met(self, player):
             if player.chakra > self.chakra_cost:
@@ -172,7 +176,7 @@ init -2 python:
            
         def hit_successful(self, player, enemy):
             hit_rate = player.base_hit_rate + self.tech - (enemy.evasion * enemy.speed)
-            #renpy.say(player.character, "Hit rate is {}".format(hit_rate)) # uncomment this to see hit rate
+            renpy.say(player.character, "Hit rate is {}".format(hit_rate)) # uncomment this to see hit rate
             if renpy.random.randint(1, 100) <= hit_rate:
                 return True
             else:

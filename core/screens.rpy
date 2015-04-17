@@ -6,9 +6,10 @@
 #
 
 init -1:
+    image black_fade_calendar = Solid((0, 0, 0, 150), area=(0.15, 0.23, 0.75,0.75))
     image black_fade_small = Solid((0, 0, 0, 150), area=(0.4, 0.7, 0.6,0.4))
     image black_fade_time = Solid((0, 0, 0, 150), area=(0, 0, 0.28,0.1))
-    image black_fade_text = Solid((0, 0, 0, 150), area=(0, 0, 500,100))
+    image black_fade_text = Solid((0, 0, 0, 150), area=(0, 0, 520,100))
     image black_fade_inventory = Solid((0, 0, 0, 150), area=(0, 0, 0.33,0.3))
     image black_fade_battle = Solid((0, 0, 0, 150), area=(0, 0, 0.2,0.2))
     image world_marker = im.Scale("marker.png", 33, 35)
@@ -91,7 +92,7 @@ screen villagearena(village, player):
 screen hospitalshop(village, player):
     $ counter = 1
     $ injury_bill = player.get_injury_bill()
-    $ sorted_items = sorted(hospital_shop.items)
+    $ sorted_items = sorted(player.items)
     text "Money: [player.ryo]" xpos 0.05
     
     imagebutton idle "black_fade_inventory" hover "black_fade_inventory" xpos 0.68 ypos 0.28
@@ -100,9 +101,9 @@ screen hospitalshop(village, player):
             text "[item.name] [item.quantity]"
     
     python:
-        if is_event_active_today(e_hospital_discount) and not hospital_shop.price_halved:
+        if is_event_active_today(e_hospital_discount, main_time) and not hospital_shop.price_halved:
             hospital_shop.half_prices()
-        elif not is_event_active_today(e_hospital_discount) and hospital_shop.price_halved:
+        elif not is_event_active_today(e_hospital_discount, main_time) and hospital_shop.price_halved:
             hospital_shop.double_prices()
     
     if injury_bill[0]:
@@ -116,11 +117,15 @@ screen hospitalshop(village, player):
         $ counter = 0
     
     for item in hospital_shop.items:
-        textbutton "[item.name] ([item.price])" action [SetField(current_session, 'village', village), 
-                                                        SetField(current_session, 'main_player', player),
-                                                        SetField(current_session, 'item', item),
-                                                        SetField(current_session, 'time_to_advance', {'hours': 2}),
-                                                        Jump("purchase_item_redirect")] xpos (grid_place[counter][0] - 0.1) ypos grid_place[counter][1]
+        if player.ryo >= item.price:
+            textbutton "[item.name] ([item.price])" action [SetField(current_session, 'village', village), 
+                                                            SetField(current_session, 'main_player', player),
+                                                            SetField(current_session, 'item', item),
+                                                            SetField(current_session, 'time_to_advance', {'hours': 2}),
+                                                            Jump("purchase_item_redirect")] xpos (grid_place[counter][0] - 0.1) ypos grid_place[counter][1]
+        else:
+            textbutton "[item.name] ([item.price])" xpos (grid_place[counter][0] - 0.1) ypos grid_place[counter][1]
+            
         $ counter += 1
                                          
     textbutton "Back to Location select" action [SetField(current_session, 'village', village), 
@@ -139,17 +144,21 @@ screen weaponshop(village, player):
             text "[weapon.name] [weapon.quantity]"
     
     python:
-        if is_event_active_today(e_weapon_discount) and not weapon_shop.price_halved:
+        if is_event_active_today(e_weapon_discount, main_time) and not weapon_shop.price_halved:
             weapon_shop.half_prices()
-        elif not is_event_active_today(e_weapon_discount) and weapon_shop.price_halved:
+        elif not is_event_active_today(e_weapon_discount, main_time) and weapon_shop.price_halved:
             weapon_shop.double_prices()
     
     for weapon in weapon_shop.items:
-        textbutton "[weapon.name] ([weapon.price])" action [SetField(current_session, 'village', village), 
-                                                            SetField(current_session, 'main_player', player),
-                                                            SetField(current_session, 'item', weapon),
-                                                            SetField(current_session, 'time_to_advance', {'hours': 2}),
-                                                            Jump("purchase_weapon_redirect")] xpos grid_place[counter][0] ypos grid_place[counter][1]
+        if player.ryo > weapon.price:
+            textbutton "[weapon.name] ([weapon.price])" action [SetField(current_session, 'village', village), 
+                                                                SetField(current_session, 'main_player', player),
+                                                                SetField(current_session, 'item', weapon),
+                                                                SetField(current_session, 'time_to_advance', {'hours': 2}),
+                                                                Jump("purchase_weapon_redirect")] xpos grid_place[counter][0] ypos grid_place[counter][1]
+        else:
+            textbutton "[weapon.name] ([weapon.price])"
+            
         $ counter += 1
                                          
     textbutton "Back to Location select" action [SetField(current_session, 'village', village), 
@@ -382,7 +391,7 @@ screen villagemap(village, player):
     $ x_adj = 0.05
     $ npc_x_adj = 0.2
     
-    for today_e in get_today().events:
+    for today_e in get_today(main_time).events:
         if today_e.npc and not today_e.stop:
             textbutton today_e.npc.name action [SetField(current_session, 'main_player', player), 
                                                 SetField(current_session, 'village', village), 
@@ -391,19 +400,18 @@ screen villagemap(village, player):
                                                 Jump(today_e.label.format(today_e.count))] xpos (grid_place[npc_counter][0]-npc_x_adj) ypos grid_place[npc_counter][1]
             $ npc_counter += 1
     
-    for location in village.locations:
-        if location.unlocked:
-            textbutton "[location.name]" hovered Show('location_explanation', stat=location.label) unhovered Hide('location_explanation') action [SetField(current_session, 'main_player', player), 
-                                                                                                                                    SetField(current_session, 'village', village), 
-                                                                                                                                    SetField(current_session, 'location', location),
-                                                                                                                                    Hide("location_explanation"),
-                                                                                                                                    Hide("villagemap"), 
-                                                                                                                                    Jump('location_redirect')] xpos grid_place[counter][0] ypos grid_place[counter][1]
+    for location in [l for l in village.locations if l.unlocked]:
+        textbutton "[location.name]" hovered Show('location_explanation', stat=location.label) unhovered Hide('location_explanation') action [SetField(current_session, 'main_player', player), 
+                                                                                                                                              SetField(current_session, 'village', village), 
+                                                                                                                                              SetField(current_session, 'location', location),
+                                                                                                                                              Hide("location_explanation"),
+                                                                                                                                              Hide("villagemap"), 
+                                                                                                                                              Jump('location_redirect')] xpos grid_place[counter][0] ypos grid_place[counter][1]
         
         # show events next to buttons
         if location.events:
             for e in location.events:
-                for today_e in get_today().events:
+                for today_e in get_today(main_time).events:
                     if e.small_name == today_e.small_name and counter < 5:
                         text "[e.small_name]" xpos (grid_place[counter][0]-x_adj) ypos grid_place[counter][1]
                     elif e.small_name == today_e.small_name and counter >= 5:
@@ -412,17 +420,17 @@ screen villagemap(village, player):
         $ counter += 1 
                 
 screen location_explanation(stat):
-    $ expl_dict = {'village_hospital': 'Heal injuries and buy healing items.', 
-                   'village_police_station': ' '*60 + 'Buy weapons for combat.', 
-                   'village_levelup': 'Spend points to increase stats like strength, speed, evasion etc.',
+    $ expl_dict = {'village_hospital': 'Heal injuries, rest and buy healing items in exchange for money.', 
+                   'village_weapon_shop': 'Buy weapons for combat.', 
+                   'village_levelup': 'Increase stats like strength, speed, evasion etc.',
                    'village_training': 'Train with team members, learn new skills, unlock new skills.', 
-                   'village_missions': ' '*65 + 'Perform missions.', 
+                   'village_missions': 'Perform missions with different ranks set by the village.', 
                    'village_home': 'Rest to heal injuries, skip time or view calendar for upcoming events.'}
     $ expl = expl_dict[stat]
     
     imagebutton idle "black_fade_text" hover "black_fade_text" xpos 0.15 ypos 0.65
-    hbox xmaximum 500 yminimum 200 xpos 0.10 ypos 0.6:
-        text "[expl]" ypos 0.8 xpos 0.1
+    hbox xmaximum 500 yminimum 200 xpos 0.1 ypos 0.6:
+        text "[expl]" ypos 0.9 xpos 0.15
         
 screen time_screen:
     imagebutton idle "black_fade_time" hover "black_fade_time" xpos 0 ypos 0.0
@@ -480,9 +488,8 @@ screen calendar_screen_toggle:
         textbutton "Show Calendar" action Jump("toggle_calendar_on") xpos 0.2 ypos 0.0
         
 screen calendar_screen(village, player, current_month):
-    $ stuff = [(d.day, d.month) for d in e_chunin_exams.date_range()]
 
-    imagebutton idle "black_fade" hover "black_fade"
+    imagebutton idle "black_fade_calendar" hover "black_fade_calendar"
     
     textbutton "Last month" action [Hide('calendar_screen'), 
                                     Show('calendar_screen', village=village, player=player, current_month=get_month(current_month.number - 1))] xpos 0.15 ypos 0.1
@@ -532,7 +539,7 @@ label toggle_calendar_off:
 # MISC
 #
 screen announce(message):
-    text "{color=#000}{font=domai.ttf}{size=60}[message]{/size}{/font}{/color}" xpos 0.13 ypos 0.4
+    text "{color=#000}{size=60}[message]{/size}{/color}" xpos 0.13 ypos 0.4
 
 
 ##############################################################################
@@ -729,20 +736,20 @@ screen battlebars(tag_p, tag_e):
     bar value player.chakra range player.maxchakra xpos 0.15 ypos 0.35 xmaximum 150
     
     # If skills active show (these will overlap warning)
-    if player.check_active_skill(damage_reduction):
+    if check_active_skill(player, "damagereduction"):
         text "DR" xpos 0.3 ypos 0.15
         
-    if player.check_active_skill(chakra_defence):
+    if check_active_skill(player, "chakradefence"):
         text "CD" xpos 0.3 ypos 0.15
         
-    if player.check_active_skill(reflect):
+    if check_active_skill(player, "reflect"):
         text "Ref" xpos 0.3 ypos 0.15
         
-    if player.check_active_skill(dampen):
+    if check_active_skill(player, "dampen"):
         text "Dam" xpos 0.3 ypos 0.15
         
-    if player.check_active_skill(yata_mirror):
-        text "Yata" xpos 0.3 ypos 0.15
+    if check_active_skill(player, "ignore"):
+        text "Ign" xpos 0.3 ypos 0.15
     
     # Enemy HUD
     imagebutton idle enemy.hudpic hover enemy.hudpic xpos 0.66 ypos 0.06
@@ -754,10 +761,10 @@ screen battlebars(tag_p, tag_e):
     bar value enemy.chakra range enemy.maxchakra xpos 0.65 ypos 0.35 xmaximum 150
         
     # If skills active show (these will overlap warning)
-    if enemy.check_active_skill(damage_reduction):
+    if check_active_skill(enemy, "damagereduction"):
         text "DR" xpos 0.75 ypos 0.15
         
-    if enemy.check_active_skill(chakra_defence):
+    if check_active_skill(enemy, "chakradefence"):
         text "CD" xpos 0.75 ypos 0.15
 
     
