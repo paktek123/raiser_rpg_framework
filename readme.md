@@ -36,7 +36,7 @@ The rpy files contain all the Python classes and functions for players, skills a
 
 Lets create our own RPG adventure and introduce many of the concepts in Raiser RPG System.
 
-Lets open up `script.rpy` with a text editor. Remove everything from script.rpy and put the following inside:
+Open up `script.rpy` with a text editor. Remove everything from script.rpy and put the following inside:
 
 
 ```
