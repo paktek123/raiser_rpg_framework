@@ -15,6 +15,10 @@ An RPG framework for Ren'py gaming engine (http://www.renpy.org/). The purpose o
 - Create political movements and micro management
 - Fully customisable, customise everything mentioned above!
 
+## Prerequisites
+
+It is reccomended to go through the Ren'py quick start: http://www.renpy.org/doc/html/quickstart.html
+
 ## Installation
 
 1. Download Ren'py from here: http://www.renpy.org/latest.html (Ren'py 6.15+)
