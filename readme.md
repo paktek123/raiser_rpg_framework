@@ -147,7 +147,7 @@ Raiser RPG Framework is free to be used for commercial or non-commercial project
 
 ## Bugs
 
-Please report bugs by opening a new github issue, will do my best to response.
+Please report bugs by opening a new github issue, will do my best to respond.
 
 ## Contributing
 
