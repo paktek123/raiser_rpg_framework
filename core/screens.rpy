@@ -597,7 +597,7 @@ screen battle_prep_screen:
         for battle in current_session.battles:
             drag:
                 drag_name battle.id
-                child "marker.png"
+                child "misc/marker.png"
                 draggable False
                 xpos (200*drag_c) ypos 260
                 

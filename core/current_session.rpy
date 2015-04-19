@@ -38,6 +38,7 @@ init -5 python:
             self.battle = None
             self.battle_follow_on = None
             self.battle_outcome = 'loss'
+            self.battle_lose_label = 'generic_loss'
             
         def clear(self):
             self.main_player = None
@@ -67,6 +68,7 @@ init -5 python:
             self.battle = None
             self.battle_follow_on = None
             self.battle_outcome = 'loss'
+            self.battle_lose_label = 'generic_loss'
             
         def clear_time_to_advance(self):
             self.rest = False

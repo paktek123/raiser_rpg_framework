@@ -257,13 +257,13 @@ label battle_choose:
         if battle_result['is_finished']:
             if battle_result['outcome'] == 'lose':
                 # if battle is lost then go to generic lose label, change it here
-                renpy.jump('generic_lose')
+                renpy.jump(current_session.battle_lose_label)
             else:
                 renpy.jump(current_session.battle_follow_on) 
     
     $ populate_battles(current_session.battles, current_session.battle_follow_on)
     show screen battle_prep_screen
-    nar_c "Choose battlefield for players."
+    "Choose battlefield for players."
     jump battle_choose
     
 ####### REDIRECTS ########

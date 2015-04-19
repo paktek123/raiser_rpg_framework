@@ -5,6 +5,13 @@
 init -6 python:
     
     import random
+    
+    POSITIVE_EFFECTS = ["Many missions completed", "Taxes are raised", "Feudal Lord is feeling generous", "It rains money!", "Not many expenses",
+                       "Economy is improving", "Wealth is compounding", "Negotiations are increasing", "Merchants are trading more"]
+    
+    NEGATIVE_EFFECTS = ["Economy is doing bad", "Not many missions are coming through", "Tax are decreased", "Feudal lord is unhappy", 
+                         "Expenses have gone up", "Bad negotiations are failing", "Recession is underway", "Corrupt leader stole wealth and left"]
+    
     class Village:
         def __init__(self, id, name, leader, marker_xpos, marker_ypos, map, wealth=100, army=1000, 
                      locations=None, village_tag='', mission_locations=1):
@@ -28,10 +35,8 @@ init -6 python:
             
         def random_wealth_event(self):
             change = renpy.random.randint(-10, 10)
-            add_say = ["Many missions completed", "Taxes are raised", "Feudal Lord is feeling generous", "It rains money!", "Not many expenses",
-                       "Economy is improving", "Wealth is compounding", "Negotiations are increasing", "Merchants are trading more"]
-            minus_say = ["Economy is doing bad", "Not many missions are coming through", "Tax are decreased", "Feudal lord is unhappy", 
-                         "Expenses have gone up", "Bad negotiations are failing", "Recession is underway", "Corrupt leader stole wealth and left"]
+            add_say = POSITIVE_EFFECTS
+            minus_say = NEGATIVE_EFFECTS
             
             self.original_wealth = self.wealth
             self.wealth += change
