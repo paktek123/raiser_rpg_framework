@@ -3,12 +3,12 @@
 #
 
 init -3:
-    image clearing_base_texture = im.Scale("tile.png", 50, 30)
-    image clearing_active_texture = im.Scale("tileh.png", 50, 30)
-    image clearing_project_texture = im.Scale("tilep.png", 50, 30)
-    image clearing_trap_texture = im.Scale("tiletrap.png", 50, 30)
+    image clearing_base_texture = im.Scale("misc/tile.png", 50, 30)
+    image clearing_active_texture = im.Scale("misc/tileh.png", 50, 30)
+    image clearing_project_texture = im.Scale("misc/tilep.png", 50, 30)
+    image clearing_trap_texture = im.Scale("misc/tiletrap.png", 50, 30)
     
-    image forest_base_texture = im.Scale("tile_grass.png", 50, 30)
+    image forest_base_texture = im.Scale("misc/tile_grass.png", 50, 30)
 
 init -3 python:
     class Stage:
