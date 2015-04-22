@@ -554,12 +554,12 @@ label event_jounin_training:
     jump village_redirect
     
     
-label village_police_station(player, village):
+label village_weaponshop(player, village):
     call time_revert
     # maybe show different weapon shop here
     show screen weaponshop(village, player)
     player.character "I need to choose weapons to buy."
-    $ renpy.call('village_ninja_tool_facility', player, village)
+    $ renpy.call('village_weaponshop', player, village)
     
 label village_missions(player, village):
     hide screen missionselect
