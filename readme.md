@@ -63,7 +63,7 @@ label load_resources:
     
     ### LOCATIONS ###
     $ l_hospital = Location(name='Hospital', label='village_hospital', events=[e_hospital_discount])
-    $ l_weapon_shop = Location(name='Weapon', label='village_weapon_shop', events=[e_weapon_discount]) # weapon shop
+    $ l_weapon_shop = Location(name='Weapon', label='village_weaponshop', events=[e_weapon_discount]) # weapon shop
     $ l_level_up = Location(name='Level Up', label='village_levelup')
     $ l_training_ground = Location(name='Training', label='village_training')
     $ l_town_mission = Location(name='Mission', label='village_missions', events=[],)
