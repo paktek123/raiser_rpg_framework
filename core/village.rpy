@@ -43,9 +43,9 @@ init -6 python:
             self.wealth_change = change
             
             if change < 0:
-                renpy.say(self.leader.character, "Gang members decreased by {}, total is {}.".format(change, self.wealth))
+                renpy.say(self.leader.character, "Wealth decreased by {}, total is {}.".format(change, self.wealth))
             else:
-                renpy.say(self.leader.character, "Gang members increased by {}, total is {}.".format(change, self.wealth))
+                renpy.say(self.leader.character, "Wealth increased by {}, total is {}.".format(change, self.wealth))
             
         def random_event(self):
             renpy.show("world_marker", [ self.marker_position ])
