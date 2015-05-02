@@ -729,7 +729,7 @@ screen battlebars(tag_p, tag_e):
     # Player HUD
     imagebutton idle player.hudpic hover player.hudpic xpos 0.16 ypos 0.06 #action NullAction()
     text "{size=-5}{color=#FFF}HP{/color}{/size}" xpos 0.10 ypos 0.3
-    text "{size=-5}{color=#FFF}MP{/color}{/size}" xpos 0.10 ypos 0.35
+    text "{size=-5}{color=#FFF}CP{/color}{/size}" xpos 0.10 ypos 0.35
     bar value player.hp range player.maxhp xpos 0.15 ypos 0.30 xmaximum 150 #ymaximum 30 left_bar "blue_bar"
     text "{size=-5}{color=#FFF}[player.hp]/[player.maxhp]{/color}{/size}" xpos 0.35 ypos 0.3
     text "{size=-5}{color=#FFF}[player.chakra]/[player.maxchakra]{/color}{/size}" xpos 0.35 ypos 0.35
@@ -754,7 +754,7 @@ screen battlebars(tag_p, tag_e):
     # Enemy HUD
     imagebutton idle enemy.hudpic hover enemy.hudpic xpos 0.66 ypos 0.06
     text "{size=-5}{color=#FFF}HP{/color}{/size}" xpos 0.60 ypos 0.3
-    text "{size=-5}{color=#FFF}MP{/color}{/size}" xpos 0.60 ypos 0.35
+    text "{size=-5}{color=#FFF}CP{/color}{/size}" xpos 0.60 ypos 0.35
     text "{size=-5}{color=#FFF}[enemy.hp]/[enemy.maxhp]{/color}{/size}" xpos 0.85 ypos 0.3
     text "{size=-5}{color=#FFF}[enemy.chakra]/[enemy.maxchakra]{/color}{/size}" xpos 0.85 ypos 0.35
     bar value enemy.hp range enemy.maxhp xpos 0.65 ypos 0.30 xmaximum 150
