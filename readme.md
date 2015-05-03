@@ -151,6 +151,21 @@ https://github.com/paktek123/raiser_rpg_framework/wiki
 
 Raiser RPG Framework is free to be used for commercial or non-commercial projects as long as credit is given even if you use parts of the code (or at least link to this repo).
 
+## Use of Art
+
+I do not own any of the backgrounds and Sprites shipped with Raiser, the credit goes to the artists below. The art is from the following places:
+
+Backgrounds:
+- http://bigbackground.com/wp-content/uploads/2013/06/colorful-space-background.jpg
+- http://lemmasoft.renai.us/forums/viewtopic.php?p=226871#p226871
+- http://www.fantasticmaps.com/wp-content/uploads/2010/06/townpackunlabelled.jpg
+
+Sprites/hud pics:
+- http://lemmasoft.renai.us/forums/viewtopic.php?f=52&t=23363
+- http://lemmasoft.renai.us/forums/viewtopic.php?f=52&t=23158
+
+Please credit the artists if you wish to use them.
+
 ## Bugs
 
 Please report bugs by opening a new github issue, will do my best to respond.
