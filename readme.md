@@ -145,7 +145,7 @@ Running the `$ show_village_map(middle_town, hero)` shows the player in middle t
 
 ## Documentation
 
-(Wiki)[https://github.com/paktek123/raiser_rpg_framework/wiki]
+[Wiki](https://github.com/paktek123/raiser_rpg_framework/wiki)
 
 ## Usage
 
